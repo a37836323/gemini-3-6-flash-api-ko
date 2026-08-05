@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>API 릴레이란 무엇인가? 2026년에는 어떻게 동작하는가</title>
+<meta name="description" content="API 릴레이는 앱과 Gemini 3.6 Flash 사이의 요청을 전달하며, 접근성·결제·신뢰성 측면에서 추가적인 트레이드오프가 생깁니다.">
+<meta name="keywords" content="Gemini 3.6 Flash API,Gemini 3.6 Flash 가격,Gemini API,AI 모델 API,LLM API,API 가격,개발자 도구,Google 모델">
+<link rel="canonical" href="https://a37836323.github.io/gemini-3-6-flash-api-ko/api-relay-explained/">
+<link rel="alternate" hreflang="ko-KR" href="https://a37836323.github.io/gemini-3-6-flash-api-ko/">
+<link rel="alternate" hreflang="ar-SA" href="https://gemini-3-6-flash-api-ar.vercel.app/">
+<link rel="alternate" hreflang="de-DE" href="https://gemini-3-6-flash-api-de.pages.dev/">
+<link rel="alternate" hreflang="es-ES" href="https://gemini-3-6-flash-api-es.pages.dev/">
+<link rel="alternate" hreflang="fr-FR" href="https://gemini-3-6-flash-api-fr.pages.dev/">
+<link rel="alternate" hreflang="id-ID" href="https://gemini-3-6-flash-api-id.pages.dev/">
+<link rel="alternate" hreflang="ja-JP" href="https://a37836323.github.io/gemini-3-6-flash-api-ja/">
+<link rel="alternate" hreflang="pt-BR" href="https://gemini-3-6-flash-api-pt.pages.dev/">
+<link rel="alternate" hreflang="ru-RU" href="https://gemini-3-6-flash-api-ru.vercel.app/">
+<link rel="alternate" hreflang="tr-TR" href="https://gemini-3-6-flash-api-tr.vercel.app/">
+<link rel="alternate" hreflang="vi-VN" href="https://gemini-3-6-flash-api-vi.vercel.app/">
+<link rel="alternate" hreflang="zh-CN" href="https://a37836323.github.io/gemini-3-6-flash-api-zh/">
+<link rel="alternate" hreflang="en-US" href="https://a37836323.github.io/gemini-3-6-flash-api/">
+<link rel="alternate" hreflang="x-default" href="https://a37836323.github.io/gemini-3-6-flash-api-ko/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="API 릴레이란 무엇인가? 2026년에는 어떻게 동작하는가">
+<meta property="og:description" content="API 릴레이는 앱과 Gemini 3.6 Flash 사이의 요청을 전달하며, 접근성·결제·신뢰성 측면에서 추가적인 트레이드오프가 생깁니다.">
+<meta property="og:url" content="https://api.openlux.ai/">
+<meta property="og:site_name" content="OpenLux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="API 릴레이란 무엇인가? 2026년에는 어떻게 동작하는가">
+<meta name="twitter:description" content="API 릴레이는 앱과 Gemini 3.6 Flash 사이의 요청을 전달하며, 접근성·결제·신뢰성 측면에서 추가적인 트레이드오프가 생깁니다.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://api.openlux.ai/#organization",
+      "name": "OpenLux",
+      "url": "https://api.openlux.ai",
+      "description": "2026년 Gemini 3.6 Flash API 가격 데이터: 기본 입력 가격은 1M 토큰당 $1.50, 출력 가격은 $7.50이며 그룹 배율에 따라 조정됩니다.",
+      "sameAs": [
+        "https://openlux.ai",
+        "https://doc.openlux.ai"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://a37836323.github.io/gemini-3-6-flash-api-ko/#website",
+      "url": "https://a37836323.github.io/gemini-3-6-flash-api-ko",
+      "name": "Gemini 3.6 Flash API 가격 및 설정 가이드 2026",
+      "inLanguage": "ko-KR",
+      "publisher": {
+        "@id": "https://api.openlux.ai/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://a37836323.github.io/gemini-3-6-flash-api-ko/api-relay-explained/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "OpenLux",
+          "item": "https://api.openlux.ai"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Gemini 3.6 Flash API",
+          "item": "https://a37836323.github.io/gemini-3-6-flash-api-ko/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "API 릴레이는 Gemini 3.6 Flash에서 어떻게 작동하는가?",
+          "item": "https://a37836323.github.io/gemini-3-6-flash-api-ko/api-relay-explained/"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://a37836323.github.io/gemini-3-6-flash-api-ko/#application",
+      "name": "OpenLux API",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "url": "https://api.openlux.ai",
+      "description": "2026년 Gemini 3.6 Flash API 가격 데이터: 기본 입력 가격은 1M 토큰당 $1.50, 출력 가격은 $7.50이며 그룹 배율에 따라 조정됩니다.",
+      "offers": {
+        "@type": "Offer",
+        "price": "실측 필요",
+        "priceCurrency": "CNY",
+        "url": "https://api.openlux.ai",
+        "description": "사용량은 사용자의 그룹 배율을 적용한 후 등록된 기본 토큰 요금을 기준으로 청구됩니다."
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://a37836323.github.io/gemini-3-6-flash-api-ko/api-relay-explained/#article",
+      "headline": "API 릴레이는 Gemini 3.6 Flash에서 어떻게 작동하는가?",
+      "datePublished": "2026-08-04",
+      "dateModified": "2026-08-05",
+      "inLanguage": "ko-KR",
+      "author": {
+        "@id": "https://api.openlux.ai/#organization"
+      },
+      "publisher": {
+        "@id": "https://api.openlux.ai/#organization"
+      },
+      "mainEntityOfPage": "https://a37836323.github.io/gemini-3-6-flash-api-ko/api-relay-explained/"
+    }
+  ]
+}
+</script>
+<style>*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#ffffff;color:#0f172a;font-family:system-ui,"Noto Sans KR","Nanum Gothic",sans-serif;
+line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased;
+text-rendering:optimizeLegibility}
+.stack-card77{max-width:900px;margin:0 auto;padding:32px 20px 64px}
+h1{font-size:1.85rem;line-height:1.4;margin:.2em 0 .6em;letter-spacing:-.01em}
+h2{font-size:1.3rem;margin:2.2em 0 .7em;padding-bottom:.35em;
+border-bottom:2px solid #cffafe}
+h3{font-size:1.08rem;margin:1.6em 0 .5em}
+a{color:#0891b2;text-decoration:none}
+a:hover,a:focus-visible{text-decoration:underline}
+code{background:#ecfeff;padding:.15em .4em;border-radius:6px;
+font-size:.9em;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:#ecfeff;border:1px solid #cffafe;border-radius:10px;
+padding:16px;overflow-x:auto;font-size:.86rem;line-height:1.6}
+pre code{background:none;padding:0}
+table{width:100%;border-collapse:collapse;margin:1.2em 0;font-size:.94rem}
+th,td{border:1px solid #cffafe;padding:10px 12px;text-align:left}
+th{background:#ecfeff;font-weight:600}
+ul,ol{padding-left:1.5em}
+ul{list-style-type:disc}
+li{margin:.4em 0}
+.unit-block66{background:#ecfeff;border-left:3px solid #0891b2;
+border-radius:0 10px 10px 0;padding:14px 18px;margin:1.4em 0}
+.deck-panel87{display:inline-block;background:#0891b2;color:#fff;
+padding:12px 26px;border-radius:10px;font-weight:600;margin:.6em 0}
+.deck-panel87:hover{opacity:.88;text-decoration:none}
+.grid-frame44{color:#71717a;font-size:.86rem;margin-top:3em;
+padding-top:1.2em;border-top:1px solid #cffafe}
+.stack-card32{border:1px solid #cffafe;border-radius:10px;
+padding:2px 18px;margin:.8em 0}
+.slot-note48{overflow-x:auto}
+@media(max-width:600px){
+  body{font-size:15px}
+  h1{font-size:1.5rem}
+  h2{font-size:1.18rem}
+  .stack-card77{padding:20px 16px 48px}
+  table{font-size:.85rem}
+  th,td{padding:8px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}</style>
+</head>
+<body>
+<main class="stack-card77">
+<p class="slot-bar43"><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/">홈</a> ／ Gemini 3.6 Flash</p>
+<h1>API 릴레이는 Gemini 3.6 Flash에서 어떻게 작동하는가?</h1>
+<p>API 릴레이는 애플리케이션에서 API 요청을 받아 이를 변환하거나 그대로 전달하고, 상위 응답을 반환하는 서비스입니다. 네트워크 접근, 결제, 계정 설정에서의 마찰을 줄일 수 있지만, 요청을 지연·변경·중단시킬 수 있는 또 하나의 시스템이 추가됩니다.</p>
+<div>
+<h2>한 문장으로 말하면 API 릴레이란 무엇인가?</h2>
+<p>API 릴레이는 애플리케이션과 모델 제공자 사이에 위치합니다. 코드는 릴레이 엔드포인트로 요청을 보내고, 릴레이는 이에 대응하는 요청을 상위 제공자나 리소스로 전송하며, 응답은 릴레이를 거쳐 애플리케이션에 도달합니다.</p>
+<p>요청 체인: Your app -&gt; API relay -&gt; upstream model resource -&gt; API relay -&gt; your app.</p>
+<p>Gemini 3.6 Flash의 경우, 릴레이의 모델 카탈로그에는 벤더가 Google, 모델 타입이 chat으로 표시됩니다. 이 페이지에 사용된 가격 데이터는 https://api.openlux.ai/api/pricing에서 가져왔으며, 이는 패널 자체의 가격 엔드포인트이고 2026년 8월 4일 16:16:08 UTC에 조회한 값입니다. 카탈로그에는 판매 중인 모델이 452개로 표시되며, 표에는 호출량이 가장 높은 150개만 포함되고 나머지 302개 모델은 표시되지 않습니다.</p>
+<h2>API 릴레이가 해결할 수 있는 세 가지 문제는 무엇인가?</h2>
+<p>첫 번째 문제는 네트워크 접근입니다. 현재 환경에서 상위 API로 직접 연결하는 것이 어렵거나 불안정하다면, 릴레이가 다른 도달 가능한 엔드포인트를 제공할 수 있습니다. 이는 라우팅 방식일 뿐 연결성이나 가동 시간을 보장하는 것은 아니며, 릴레이 역시 자체 네트워크와 상위 경로에 의존합니다.</p>
+<p>두 번째 문제는 결제입니다. 릴레이는 개발자와 상위 리소스 사이에 자체 청구 관계를 둘 수 있으므로, 개발자가 반드시 해당 제공자와 직접 결제를 관리할 필요는 없습니다. 특정 릴레이가 어떤 결제 수단을 받는지는 서비스별로 다르며, 해당 서비스의 최신 문서에서 확인해야 합니다.</p>
+<p>세 번째 문제는 계정 처리입니다. 제공자 계정, 인증 정보, 리소스를 기준으로 모든 애플리케이션을 개별 설정하는 대신, 릴레이가 애플리케이션이 사용할 하나의 계정이나 엔드포인트를 노출할 수 있습니다. 그러면 접근 제어, 자격 증명 처리, 사용 기록, 계정 제한을 포함한 책임이 릴레이로 넘어갑니다. 책임이 사라지는 것이 아니라, 위치가 옮겨지는 것입니다.</p>
+<h2>API 릴레이는 공식 직접 접근과 어떻게 다른가?</h2>
+<p>공식 직접 접근에서는 애플리케이션이 제공자의 API 엔드포인트와 직접 통신하며, 그 제공자의 인증 방식, 요청 형식, 모델 라이프사이클, 사용 정책, 청구 프로세스를 따릅니다. 릴레이를 사용하면 먼저 릴레이와 통신하게 되므로, 릴레이가 API 계약의 일부가 됩니다.</p>
+<p>릴레이는 익숙한 요청 구조를 유지할 수 있지만, 호환성은 가정이 아니라 테스트로 확인해야 합니다. 릴레이가 한 인터페이스를 다른 인터페이스로 매핑할 때 모델 이름, 스트리밍 동작, 오류 본문, 툴 호출, 멀티모달 입력, 응답 메타데이터가 달라질 수 있습니다. 카탈로그에 모델 이름이 있다고 해서 상위의 모든 기능을 지원한다는 뜻은 아닙니다.</p>
+<p>Gemini 3.6 Flash의 경우, 제공된 카탈로그에는 모델 ID, 벤더, 타입, 가격 필드가 있습니다. 검증된 지연 시간, 가용성 수치, API 제한, 컨텍스트 길이, 파라미터 수, 완전한 기능 매트릭스는 제공되지 않습니다. 해당 값들은 아직 측정되지 않았거나 여기에는 제공되지 않았습니다.</p>
+<h2>API 릴레이는 자체 구축 프록시와 어떻게 다른가?</h2>
+<p>자체 구축 프록시는 팀이 운영합니다. 배포, 라우팅, 로그, 시크릿, 변환, 재시도 동작, 장애 처리를 직접 통제할 수 있습니다. API 릴레이는 다른 주체가 운영하므로, 운영 부담을 그 주체의 구현과 정책에 대한 의존으로 바꾸게 됩니다.</p>
+<p>디버깅할 때 그 경계가 중요합니다. 자체 구축 프록시에서는 프록시와 상위 요청 경로를 직접 확인할 수 있습니다. 제3자 릴레이를 사용할 때는 앱에서 릴레이로 가는 요청과 릴레이가 반환한 결과만 볼 수 있을 수 있습니다. 어떤 요청 데이터가 로그되는지, 로그가 얼마나 오래 보관되는지, 자격 증명은 어떻게 처리되는지, 전송 전에 요청이 변환되는지 확인해야 합니다.</p>
+<p>릴레이 카탈로그에는 서로 다른 승수(multiplier)를 가진 여러 리소스 그룹이 포함되어 있습니다. Gemini 3.6 Flash의 경우, 표시된 기본 가격은 입력 토큰 100만 개당 $1.50, 출력 토큰 100만 개당 $7.50, 캐시 토큰 100만 개당 $0.15입니다. 명시된 가격 규칙은 최종 가격 = 기본 가격 × 사용자의 그룹 승수입니다. 따라서 그룹 할당은 실제 계약의 일부입니다.</p>
+<h2>추가 네트워크 홉의 비용은 얼마인가?</h2>
+<p>첫 번째 비용은 지연 시간입니다. 요청은 애플리케이션과 상위 리소스 사이에 추가 경로를 거치며, 릴레이가 인증, 라우팅, 변환, 큐잉, 재시도를 수행할 수도 있습니다. 이 서비스와 모델의 실제 추가 지연 시간은 아직 측정되지 않았으므로, 직접 경로와 동일한 프롬프트, 페이로드, 리전, 스트리밍 모드, 동시성으로 벤치마크해야 합니다.</p>
+<p>두 번째 비용은 적응 지연입니다. 상위 모델이 필드나 동작을 변경하면, 릴레이가 그 변경을 노출하거나 인터페이스에 맞게 매핑하거나 문서화하는 데 시간이 걸릴 수 있습니다. 카탈로그에 모델이 보인다고 해서 새로 추가된 모든 API 필드가 이미 릴레이를 통해 사용 가능하다는 뜻은 아닙니다.</p>
+<p>세 번째 비용은 장애 격리입니다. 타임아웃은 애플리케이션, 릴레이, 둘 사이의 네트워크, 릴레이의 상위 연결, 모델 리소스에서 발생할 수 있습니다. 유용한 테스트는 애플리케이션 경계에서 타임스탬프와 요청 식별자를 기록하고, 이를 릴레이의 응답 및 오류 세부정보와 비교하는 것입니다. 그런 증거가 없으면 모델에 책임을 돌리는 것은 추측입니다.</p>
+<h2>언제 API 릴레이를 사용하면 안 되는가?</h2>
+<p>프롬프트, 파일, 자격 증명, 생성된 콘텐츠를 추가 운영자를 통해 전송하는 것이 컴플라이언스나 보안 요구사항에 위배된다면 릴레이를 사용하지 마십시오. 제공된 사실만으로는 이 릴레이의 보존 정책, 인증, 데이터 처리 약속, 격리 보장이 확인되지 않으므로, 민감한 데이터를 다루기 전에 별도로 확인해야 합니다.</p>
+<p>테스트된 대체 경로와 명확한 장애 대응 연락처가 없는 상태에서 중요한 운영 워크플로의 유일한 경로를 릴레이로 두지 마십시오. 추가 의존성은 상위 제공자와 무관하게 실패할 수 있습니다. 적절한 대체 경로는 직접 공식 접근, 두 번째 릴레이, 큐 기반 워크플로일 수 있지만, 선택은 시스템에 따라 다르며 반드시 테스트해야 합니다.</p>
+<p>릴레이는 제공자별 기능, 정확한 오류 의미, 엄격한 릴리스 시점, 라우팅과 자격 증명에 대한 완전한 제어가 필요할 때도 적합하지 않습니다. 그런 경우에는 직접 접근이나 자체 운영 프록시가 더 적합할 수 있지만, 더 많은 계정·네트워크·운영 작업이 필요할 수 있습니다.</p>
+<h2>API 릴레이가 신뢰할 만한지 어떻게 알 수 있는가?</h2>
+<p>실제 경로에 대한 증거부터 확인하십시오. 작은 비민감성 테스트로 엔드포인트, 모델 식별자, 상위 리소스 설명, 인증 방식, 응답 형식, 스트리밍 동작, 오류 동작을 확인합니다. Gemini 3.6 Flash의 경우 모델 식별자가 정확히 gemini-3.6-flash인지 확인하고, 반환 필드를 애플리케이션이 기대하는 인터페이스와 비교하십시오.</p>
+<p>헤드라인 숫자를 믿지 말고 가격을 기계적으로 확인하십시오. 제공된 패널 데이터에서는 Gemini 3.6 Flash의 가격을 기본 가격으로 표시하며, 최종 가격은 할당된 그룹 승수에 따라 달라집니다. 그룹, 승수, 통화, 토큰 단위, 캐시 규칙, 가격을 확인한 시점을 기록하십시오. 카탈로그 데이터는 2026년 8월 4일에 가져왔으므로, 이후 값은 다시 확인해야 합니다.</p>
+<p>그 다음에는 제공된 사실만으로는 확립되지 않은 부분을 측정하십시오: 성공률, p50 및 p95 지연 시간, 스트리밍의 첫 토큰까지 걸리는 시간, 오류율, 재시도 동작, 할당량 동작, 모델 업데이트 지연, 인시던트 대응입니다. 이 항목들은 여기서 아직 측정되지 않았습니다. 마지막으로 데이터 로깅, 보관 기간, 자격 증명 저장, 상위 라우팅, 모델 비활성화 공지, 계정 정지에 대해 직접 질문하십시오. 릴레이는 답변이 구체적이고 독립적으로 검증 가능할수록 더 신뢰하기 쉽습니다.</p>
+<p>아직 해결되지 않았나요? 전체 문서와 지원은 <a href="https://api.openlux.ai/register?channel=c_lkv0gzwj" rel="nofollow noopener" data-cta="link">OpenLux Gemini 3.6 Flash API</a>에서 확인할 수 있습니다.</p>
+</div>
+<div>
+<h2>이 사이트의 더 많은 내용</h2>
+<ul class="frame-slot27">
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/pricing/">Gemini 3.6 Flash API의 비용은 얼마인가요?</a><span>기본 요금, 청구 기준 및 그룹 배수</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/quickstart/">Gemini 3.6 Flash API를 어떻게 호출하나요?</a><span>설정 단계 및 복사하여 바로 사용할 수 있는 코드</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/compare/">Gemini 3.6 Flash: 직접 API를 사용할까요, 게이트웨이를 사용할까요?</a><span>제한 사항을 포함한 항목별 비교</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/faq/">Gemini 3.6 Flash API — 자주 묻는 질문</a><span>통합할 때 사람들이 실제로 묻는 질문</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/gemini-flash-payment-options/">Gemini 3.6 Flash API 결제 옵션: 신용카드 없이 결제할 수 있나요?</a><span>결제 옵션 및 청구 확인</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/gemini-flash-buying/">Gemini 3.6 Flash API를 구매할 수 있는 곳</a><span>Buy Gemini 3.6 Flash</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/claude-code-relay-config/">Claude Code용 Gemini 3.6 Flash 설정</a><span>Claude Code 릴레이 액세스 구성</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/gemini-flash-cost-comparison/">Gemini 3.6 Flash API 비용: 실용적인 가성비 점검</a><span>Gemini Flash API 비용 비교</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/gemini-api-ban-risk/">Gemini 3.6 Flash API를 사용하면 계정이 차단될 수 있나요?</a><span>API 사용 전에 차단 위험 검토</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/gemini-flash-free-trial/">2026년에 Gemini 3.6 Flash API를 무료로 써볼 수 있나요?</a><span>무료 할당량 상태</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/organization-disabled-error-fix/">Cline에서 보이는 “api error 400 this organization has been disabled”: 먼저 확인할 것</a><span>비활성화된 조직 오류</span></li>
+</ul>
+</div>
+<div>
+<h2>시작하기</h2>
+<p>현재 가격 기록을 확인하고 통합 환경에서 Gemini 3.6 Flash를 검증하세요.</p>
+<p><a class="deck-panel87" href="https://api.openlux.ai/register?channel=c_lkv0gzwj" rel="nofollow noopener" data-cta="button">무료 크레딧으로 시작하기</a></p>
+<p>공식 사이트: <a href="https://api.openlux.ai/register?channel=c_lkv0gzwj" rel="nofollow noopener" data-cta="link">사이트 방문하기</a></p>
+</div>
+<p class="grid-frame44">최종 업데이트 2026년 8월 5일　|　OpenLux에서 작성하고 유지 관리합니다.<br>지연 시간과 가격 수치는 자체 측정 결과입니다. 공급업체 사이트와 다를 경우 공급업체의 실시간 페이지를 기준으로 합니다.</p>
+</main>
+<script>
+(function(){
+  try{
+    var EP='https://tk.openlux.ai/collect',S='gemini-3-6-flash-api-ko',L='ko-KR',V=1;
+    var sid=Math.random().toString(36).slice(2)+Date.now().toString(36);
+    function send(type,extra){
+      try{
+        var p={v:V,t:type,s:S,l:L,sid:sid,
+               r:document.referrer||'',
+               p:location.pathname||'/',
+               q:location.search||'',
+               sw:screen.width||0,
+               tz:(Intl.DateTimeFormat().resolvedOptions()||{}).timeZone||''};
+        for(var k in extra){p[k]=extra[k];}
+        var body=JSON.stringify(p);
+        if(navigator.sendBeacon){
+          navigator.sendBeacon(EP,new Blob([body],{type:'text/plain;charset=UTF-8'}));
+        }else{
+          fetch(EP,{method:'POST',body:body,keepalive:true,mode:'no-cors'});
+        }
+      }catch(e){}
+    }
+    if(document.visibilityState==='prerender'){
+      document.addEventListener('visibilitychange',function h(){
+        if(document.visibilityState!=='prerender'){
+          document.removeEventListener('visibilitychange',h);send('view');
+        }
+      });
+    }else{
+      send('view');
+    }
+    document.addEventListener('click',function(e){
+      var a=e.target&&e.target.closest?e.target.closest('a[data-cta]'):null;
+      if(!a)return;
+      send('click',{c:a.getAttribute('data-cta')||'',h:a.href||''});
+    },{capture:true,passive:true});
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
