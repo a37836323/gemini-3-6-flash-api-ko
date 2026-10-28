@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>gemini-3.6-flash로 이전한 뒤 400 오류: 프리필, thinking_budget, temperature 수정 방법</title>
+<meta name="description" content="gemini-3-flash-preview나 gemini-3.5-flash에서 gemini-3.6-flash로 바꾼 뒤 HTTP 400이 반환될 때의 대처법을 Google 공식 마이그레이션 체크리스트에 따라 설명합니다. model 턴 프리필, 무시되는 temperature/top_p/top_k, candidate_count, thinking_budget에서 thinking_level로의 전환, 함수 호출, 수정 후 확인 방법까지 정리했습니다.">
+<meta name="keywords" content="Gemini 3.6 Flash API,Gemini 3.6 Flash 가격,Gemini API,AI 모델 API,LLM API,API 가격,개발자 도구,Google 모델">
+<link rel="canonical" href="https://a37836323.github.io/gemini-3-6-flash-api-ko/gemini-3-6-flash-ijeon-400-error/">
+<link rel="alternate" hreflang="ko-KR" href="https://a37836323.github.io/gemini-3-6-flash-api-ko/">
+<link rel="alternate" hreflang="ar-SA" href="https://gemini-3-6-flash-api-ar.vercel.app/">
+<link rel="alternate" hreflang="de-DE" href="https://gemini-3-6-flash-api-de.pages.dev/">
+<link rel="alternate" hreflang="es-ES" href="https://gemini-3-6-flash-api-es.pages.dev/">
+<link rel="alternate" hreflang="fr-FR" href="https://gemini-3-6-flash-api-fr.pages.dev/">
+<link rel="alternate" hreflang="id-ID" href="https://gemini-3-6-flash-api-id.pages.dev/">
+<link rel="alternate" hreflang="ja-JP" href="https://a37836323.github.io/gemini-3-6-flash-api-ja/">
+<link rel="alternate" hreflang="pt-BR" href="https://gemini-3-6-flash-api-pt.pages.dev/">
+<link rel="alternate" hreflang="ru-RU" href="https://gemini-3-6-flash-api-ru.vercel.app/">
+<link rel="alternate" hreflang="tr-TR" href="https://gemini-3-6-flash-api-tr.vercel.app/">
+<link rel="alternate" hreflang="vi-VN" href="https://gemini-3-6-flash-api-vi.vercel.app/">
+<link rel="alternate" hreflang="zh-CN" href="https://a37836323.github.io/gemini-3-6-flash-api-zh/">
+<link rel="alternate" hreflang="en-US" href="https://a37836323.github.io/gemini-3-6-flash-api/">
+<link rel="alternate" hreflang="x-default" href="https://a37836323.github.io/gemini-3-6-flash-api-ko/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="gemini-3.6-flash로 이전한 뒤 400 오류: 프리필, thinking_budget, temperature 수정 방법">
+<meta property="og:description" content="gemini-3-flash-preview나 gemini-3.5-flash에서 gemini-3.6-flash로 바꾼 뒤 HTTP 400이 반환될 때의 대처법을 Google 공식 마이그레이션 체크리스트에 따라 설명합니다. model 턴 프리필, 무시되는 temperature/top_p/top_k, candidate_count, thinking_budget에서 thinking_level로의 전환, 함수 호출, 수정 후 확인 방법까지 정리했습니다.">
+<meta property="og:url" content="https://api.openlux.ai/">
+<meta property="og:site_name" content="OpenLux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="gemini-3.6-flash로 이전한 뒤 400 오류: 프리필, thinking_budget, temperature 수정 방법">
+<meta name="twitter:description" content="gemini-3-flash-preview나 gemini-3.5-flash에서 gemini-3.6-flash로 바꾼 뒤 HTTP 400이 반환될 때의 대처법을 Google 공식 마이그레이션 체크리스트에 따라 설명합니다. model 턴 프리필, 무시되는 temperature/top_p/top_k, candidate_count, thinking_budget에서 thinking_level로의 전환, 함수 호출, 수정 후 확인 방법까지 정리했습니다.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://api.openlux.ai/#organization",
+      "name": "OpenLux",
+      "url": "https://api.openlux.ai",
+      "description": "2026년 Gemini 3.6 Flash API 가격 데이터: 기본 입력 가격은 1M 토큰당 $1.50, 출력 가격은 $7.50이며 그룹 배율에 따라 조정됩니다.",
+      "sameAs": [
+        "https://openlux.ai",
+        "https://doc.openlux.ai"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://a37836323.github.io/gemini-3-6-flash-api-ko/#website",
+      "url": "https://a37836323.github.io/gemini-3-6-flash-api-ko",
+      "name": "Gemini 3.6 Flash API 가격 및 설정 가이드 2026",
+      "inLanguage": "ko-KR",
+      "publisher": {
+        "@id": "https://api.openlux.ai/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://a37836323.github.io/gemini-3-6-flash-api-ko/gemini-3-6-flash-ijeon-400-error/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "OpenLux",
+          "item": "https://api.openlux.ai"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Gemini 3.6 Flash API",
+          "item": "https://a37836323.github.io/gemini-3-6-flash-api-ko/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "gemini-3.6-flash 이전 후 HTTP 400이 날 때: 공식 체크리스트에 따른 항목별 수정",
+          "item": "https://a37836323.github.io/gemini-3-6-flash-api-ko/gemini-3-6-flash-ijeon-400-error/"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://a37836323.github.io/gemini-3-6-flash-api-ko/#application",
+      "name": "OpenLux API",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "url": "https://api.openlux.ai",
+      "description": "2026년 Gemini 3.6 Flash API 가격 데이터: 기본 입력 가격은 1M 토큰당 $1.50, 출력 가격은 $7.50이며 그룹 배율에 따라 조정됩니다.",
+      "offers": {
+        "@type": "Offer",
+        "price": "실측 필요",
+        "priceCurrency": "CNY",
+        "url": "https://api.openlux.ai",
+        "description": "사용량은 사용자의 그룹 배율을 적용한 후 등록된 기본 토큰 요금을 기준으로 청구됩니다."
+      }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://a37836323.github.io/gemini-3-6-flash-api-ko/gemini-3-6-flash-ijeon-400-error/#article",
+      "headline": "gemini-3.6-flash 이전 후 HTTP 400이 날 때: 공식 체크리스트에 따른 항목별 수정",
+      "datePublished": "2026-08-04",
+      "dateModified": "2026-10-28",
+      "inLanguage": "ko-KR",
+      "author": {
+        "@id": "https://api.openlux.ai/#organization"
+      },
+      "publisher": {
+        "@id": "https://api.openlux.ai/#organization"
+      },
+      "mainEntityOfPage": "https://a37836323.github.io/gemini-3-6-flash-api-ko/gemini-3-6-flash-ijeon-400-error/"
+    }
+  ]
+}
+</script>
+<style>*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#ffffff;color:#0f172a;font-family:system-ui,"Noto Sans KR","Nanum Gothic",sans-serif;
+line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased;
+text-rendering:optimizeLegibility}
+.stack-card77{max-width:900px;margin:0 auto;padding:32px 20px 64px}
+h1{font-size:1.85rem;line-height:1.4;margin:.2em 0 .6em;letter-spacing:-.01em}
+h2{font-size:1.3rem;margin:2.2em 0 .7em;padding-bottom:.35em;
+border-bottom:2px solid #cffafe}
+h3{font-size:1.08rem;margin:1.6em 0 .5em}
+a{color:#0891b2;text-decoration:none}
+a:hover,a:focus-visible{text-decoration:underline}
+code{background:#ecfeff;padding:.15em .4em;border-radius:6px;
+font-size:.9em;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:#ecfeff;border:1px solid #cffafe;border-radius:10px;
+padding:16px;overflow-x:auto;font-size:.86rem;line-height:1.6}
+pre code{background:none;padding:0}
+table{width:100%;border-collapse:collapse;margin:1.2em 0;font-size:.94rem}
+th,td{border:1px solid #cffafe;padding:10px 12px;text-align:left}
+th{background:#ecfeff;font-weight:600}
+ul,ol{padding-left:1.5em}
+ul{list-style-type:disc}
+li{margin:.4em 0}
+.unit-block66{background:#ecfeff;border-left:3px solid #0891b2;
+border-radius:0 10px 10px 0;padding:14px 18px;margin:1.4em 0}
+.deck-panel87{display:inline-block;background:#0891b2;color:#fff;
+padding:12px 26px;border-radius:10px;font-weight:600;margin:.6em 0}
+.deck-panel87:hover{opacity:.88;text-decoration:none}
+.grid-frame44{color:#71717a;font-size:.86rem;margin-top:3em;
+padding-top:1.2em;border-top:1px solid #cffafe}
+.stack-card32{border:1px solid #cffafe;border-radius:10px;
+padding:2px 18px;margin:.8em 0}
+.slot-note48{overflow-x:auto}
+@media(max-width:600px){
+  body{font-size:15px}
+  h1{font-size:1.5rem}
+  h2{font-size:1.18rem}
+  .stack-card77{padding:20px 16px 48px}
+  table{font-size:.85rem}
+  th,td{padding:8px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}</style>
+</head>
+<body>
+<main class="stack-card77">
+<p data-notice="price-20261025" style="margin:0 0 16px;padding:10px 14px;border:1px solid #f0c36d;background:#fff8e6;color:#5c4400;border-radius:6px;font-size:14px;line-height:1.6">이 페이지의 가격 및 모델 정보는 변경되었을 수 있습니다. 최신 요금은 <a href="https://www.openlux.ai/pricing?utm_source=gemini-3-6-flash-api-ko&amp;utm_medium=satellite&amp;utm_campaign=price_notice" style="color:#0b57d0">OpenLux 요금 페이지</a>에서 확인하세요.</p>
+<p class="slot-bar43"><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/">홈</a> ／ Gemini 3.6 Flash</p>
+<h1>gemini-3.6-flash 이전 후 HTTP 400이 날 때: 공식 체크리스트에 따른 항목별 수정</h1>
+<p>gemini-3-flash-preview나 gemini-3.5-flash를 gemini-3.6-flash로 바꾼 뒤 요청이 HTTP 400을 반환한다면 먼저 두 가지를 확인하세요. 요청의 마지막이 미리 채워 둔 model 턴(프리필)으로 끝나지 않는지, 그리고 thinking_level과 thinking_budget을 동시에 보내고 있지 않은지입니다. Google 공식 페이지 「What&#x27;s new in Gemini 3.6 Flash and 3.5 Flash-Lite」(https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6, 2026-10-13 업데이트)는 요청에서 비어 있지 않은 마지막 턴이 model 턴이면 API가 400 오류를 반환한다고 명시합니다. 같은 페이지에는 temperature, top_p, top_k가 지원 중단되어 무시되며, 향후 모델 세대에서는 이 값을 보내면 HTTP 400이 반환된다는 내용도 있습니다. 마이그레이션 체크리스트는 candidate_count 제거, thinking_budget을 thinking_level로 교체, 함수 호출 코드 점검도 요구합니다. 아래에서는 Google 문서에 따라 항목별로 확인하고, 마지막으로 수정이 제대로 되었는지 확인하는 방법을 설명합니다.</p>
+
+<div>
+<h2>영향을 받는 코드</h2>
+<p>지원 중단 모델 페이지(https://ai.google.dev/gemini-api/docs/deprecations, 2026-10-22 업데이트)는 gemini-3-flash-preview와 gemini-3.5-flash의 권장 대체 모델로 gemini-3.6-flash를 제시합니다. gemini-3.5-flash에 대해서는 엔드포인트가 종료되지 않고 API 요청을 자동으로 gemini-3.6-flash로 라우팅하며, Google AI Studio에서는 이 모델을 선택할 수 없다는 설명이 붙어 있습니다.</p>
+<p>즉 Google API를 직접 호출하면서 코드에 아직 gemini-3.5-flash를 지정하고 있더라도, 요청은 이미 gemini-3.6-flash가 처리하고 있습니다. 이 페이지에서 다루는 규칙은 그런 코드에도 해당합니다.</p>
+<p>새 기능 페이지는 현재 gemini-3.6-flash와 gemini-3.5-flash-lite를 Gemini 3 시리즈의 이전 세대 릴리스이며 프로덕션에서 계속 사용할 수 있는 모델로 설명하고, 최신 Flash 모델로는 Gemini 3.8 Flash를 안내합니다. 지원 중단 모델 페이지에는 gemini-3.6-flash의 종료일이 발표되어 있지 않습니다. 공식 가이드는 Gemini 3.5 Flash, Gemini 3 Flash(Preview), Gemini 3.1 Pro에서 3.6 Flash로의 이전을 다룹니다.</p>
+<p>Google에 따르면 이러한 API 변경은 Gemini 3.6 Flash와 Gemini 3.5 Flash-Lite, 그리고 이후 출시되는 모든 Gemini 모델에 적용됩니다. 따라서 여기서 한 수정은 더 새로운 모델로 옮길 때도 그대로 유지하는 편이 안전합니다.</p>
+<h2>model 턴 프리필이 400을 일으키는 경우</h2>
+<p>공식 가이드에 따르면 model 턴 프리필은 더 이상 지원되지 않습니다. 요청에서 비어 있지 않은 마지막 턴의 역할이 model이면 API는 400 오류를 반환합니다. 프리필이란 contents 끝에 model 역할의 턴(예: JSON 객체의 시작 부분)을 넣어 모델이 그 뒤를 이어 쓰게 하는 기법입니다.</p>
+<p>이 규칙이 보는 것은 비어 있지 않은 마지막 턴뿐입니다. user와 model 턴이 번갈아 나오는 일반적인 대화 기록은 비어 있지 않은 마지막 턴이 model이 아니라면 문제가 없습니다.</p>
+<p>Google은 대안으로 두 가지를 제시합니다. 형식이나 어조에 관한 요구 사항을 system_instruction에 적는 방법과, Structured outputs(https://ai.google.dev/gemini-api/docs/structured-output)로 응답 형식을 제한하는 방법입니다. JSON을 얻으려고 프리필을 썼다면 Structured outputs로 바꿀 수 있습니다.</p>
+<p>원인을 가려내려면 실제로 API에 전송되는 요청 본문을 로그로 남기고, contents의 비어 있지 않은 마지막 턴이 model인지 확인하세요. 중간 라이브러리를 사용한다면 직접 작성한 코드뿐 아니라 그 라이브러리가 보내는 본문도 확인해야 합니다.</p>
+<h2>temperature, top_p, top_k와 candidate_count</h2>
+<p>마이그레이션 가이드에 따르면 temperature, top_p, top_k는 지원 중단되었으며 API가 무시합니다. 향후 모델 세대에서는 이 파라미터를 보내면 HTTP 400이 반환되므로, 모든 요청에서 제거하라고 안내합니다. 3.6 Flash에서는 현재 오류가 나지는 않지만 효과도 없습니다.</p>
+<p>실무적으로는 응답을 안정시키려고 temperature를 0으로 두었던 코드가 3.6 Flash에서는 그 효과를 얻지 못한다는 뜻입니다. 결정성을 높이고 싶다면, Google은 사용 사례에 맞는 명확한 규칙을 담은 system instruction을 정의하라고 권장합니다.</p>
+<p>체크리스트는 candidate_count 제거도 요구합니다. Google에 따르면 candidate_count는 Gemini 3 이후 지원되지 않습니다.</p>
+<p>참고로 Gemini 3 개발자 가이드(https://ai.google.dev/gemini-api/docs/gemini-3)는 현재 「지원 중단되었으며 삭제될 예정」이라고 표시되어 있지만, temperature를 기본값 1.0으로 유지할 것을 강력히 권장하고, 1.0 미만으로 낮추면 반복(looping)이나 성능 저하 같은 예기치 않은 동작이 생길 수 있다고 경고했습니다. 3.6 Flash 마이그레이션 가이드는 그보다 새로운 지침으로, 이 파라미터들을 그냥 제거하도록 합니다.</p>
+<h2>thinking_budget을 thinking_level로 교체하기</h2>
+<p>체크리스트는 thinking_budget을 thinking_level로 바꾸라고 하며, 값으로 medium 또는 high를 제시합니다. 공식 Thinking 페이지(https://ai.google.dev/gemini-api/docs/thinking)의 표에서 gemini-3.6-flash는 사고가 기본적으로 켜져 있고(medium), minimal, low, medium, high 수준을 지원합니다. 이 표에는 이 모델의 사고를 끄는 옵션이 나와 있지 않으며, 가장 낮은 수준은 minimal입니다.</p>
+<p>gemini-3-flash-preview에서 옮기는 경우 기본값에 주의하세요. 같은 표에서 gemini-3-flash-preview의 기본값은 high, gemini-3.6-flash의 기본값은 medium입니다. 코드에서 사고 수준을 지정하지 않고 기본값에 맡겼다면, 전환 후 실제 수준이 high에서 medium으로 내려갑니다. 이전 동작을 유지하려면 high를 명시하세요. gemini-3.5-flash에서 옮기는 경우에는 기본값이 바뀌지 않습니다. Google은 3.6 Flash가 3.5 Flash와 같은 medium을 기본 사고 수준으로 사용한다고 설명합니다.</p>
+<p>지원 중단된 Gemini 3 가이드에는 thinking_budget이 하위 호환을 위해 계속 지원되지만, thinking_level과 기존 thinking_budget을 같은 요청에서 함께 쓸 수 없으며 그렇게 하면 400 오류가 반환된다고 적혀 있습니다. 새 필드를 추가했다면 둘 다 보내지 말고 이전 필드를 삭제하세요.</p>
+<p>Google 예제는 Interactions API를 사용하며, 사고 수준을 generation_config 안의 thinking_level 필드로 지정합니다. generateContent에서는 사고 관련 필드의 이름이나 위치가 다를 수 있으므로, Interactions API 예제의 필드 이름을 그대로 가져다 쓰지 말고 API 레퍼런스(https://ai.google.dev/api/generate-content)의 GenerationConfig를 확인하세요.</p>
+<h2>함수 호출과 thought signature에서 확인할 점</h2>
+<p>체크리스트는 함수 호출 코드를 점검하라고 요구합니다. 첫째, 멀티모달 에셋을 응답 페이로드(response payload) 안에 넣는 것입니다. Function calling 페이지(https://ai.google.dev/gemini-api/docs/function-calling)에 따르면 Gemini 3 시리즈 모델에서는 function_result 단계의 result 필드에 하나 이상의 콘텐츠 블록을 넣어 보낼 수 있고, 각 블록에는 text나 image 같은 type을 지정해야 합니다.</p>
+<p>둘째, 인라인 지시를 줄바꿈 두 개(\n\n)로 구분해 형식을 맞추는 것입니다. 공식 체크리스트에는 이 이상의 설명이 없습니다.</p>
+<p>셋째, Malformed_Function_Call입니다. Function calling 페이지에 따르면 도구 호출 직전에 구조화된 텍스트(XML, YAML, JSON 등)를 출력하도록 프롬프트에서 요구하면, 그 도구 호출이 가끔 Malformed_Function_Call로 실패할 수 있습니다. 권장 대처는 도구 호출 전 메모를 일반 텍스트가 아니라 전용 update 함수 호출에 담도록 모델에 지시하는 것입니다. update 함수는 previous_step, plan, next_step, external 네 개의 STRING 타입 파라미터를 가지며, 네 개 모두 필수로 선언합니다. 대안으로는 메모를 Markdown 제목(# UPDATE, ## PLAN 등)으로 쓰게 하거나, 도구 호출 전에 텍스트 출력을 요구하지 않는 두 가지 방법이 제시되어 있습니다.</p>
+<p>thought signature에 대해 Function calling 페이지는 SDK가 자동으로 처리한다고 설명합니다. 대화 기록을 직접 관리하는 경우(무상태 모드), Thinking 페이지에 따르면 모든 thought 블록을 받은 그대로 다시 보내야 하며, 기록에서 삭제하거나 수정하면 안 됩니다. 세션 도중 모델을 바꾸는 경우에도 마찬가지입니다. 상태 저장 모드(store를 true로 설정하고 이후 턴에서 previous_interaction_id를 전달)에서는 signature와 관련해 따로 할 일이 없습니다. API 레퍼런스에는 종료 사유 MISSING_THOUGHT_SIGNATURE도 있으며, 「요청에 thought signature가 하나 이상 누락됨」이라고 설명되어 있습니다. 이 값이 나오면 기록에서 thought 블록이 빠지지 않았는지 확인하세요.</p>
+<h2>오류 메시지 없이 바뀌는 동작</h2>
+<p>마이그레이션 가이드에 따르면 3.6 Flash는 Gemini 3.5 Flash보다 변경을 가하기 전에 진단용 스크립트를 먼저 실행하는 경우가 더 잦습니다. Google은 이것이 복잡한 작업에서 정확도를 높이지만, 일상적인 프런트엔드 작업에서는 탐색 단계가 늘어날 수 있다고 설명합니다.</p>
+<p>또한 시각적 레이아웃과 스타일링에 대해서는 사람 평가자들이 이전 모델을 더 선호했다고 합니다. Google은 명확한 디자인 가이드라인을 제공하면 이를 완화할 수 있다고 말합니다.</p>
+<p>Google은 3.6 Flash가 Gemini 3.5보다 더 적은 추론 단계, 대화 턴, 도구 호출로 다단계 워크플로를 완료한다고도 설명합니다. 이것이 사용량에 영향을 주는지는 직접 청구 데이터로 확인하세요. 요금은 OpenLux 요금 페이지에서 확인하세요.</p>
+<h2>수정이 되었는지 확인하는 방법</h2>
+<p>1단계: /v1/models 엔드포인트를 호출해 목록에 gemini-3.6-flash가 있는지 확인합니다. 그다음 애플리케이션 코드가 실제로 새 모델 이름을 사용하는지 확인합니다.</p>
+<p>2단계: 비어 있지 않은 마지막 턴이 user이고, temperature, top_p, top_k, candidate_count를 포함하지 않으며, 사고 파라미터는 하나(thinking_level)만 있는 최소 요청을 보냅니다. 상태 코드 200과 본문이 있는 응답이 오고, 이전의 400 오류가 더 이상 나지 않는지 확인합니다.</p>
+<p>3단계: 사고 수준이 실제로 적용되는지 확인합니다. generateContent 응답에서는 usageMetadata.thoughtsTokenCount 필드가 사고 토큰 수를 나타냅니다(Interactions API에서는 total_thought_tokens로 반환됩니다). 같은 프롬프트를 low와 high로 한 번씩 보내 값을 비교하면 설정이 모델에 전달되는지 알 수 있습니다.</p>
+<p>4단계: 프리필을 Structured outputs로 바꿨다면 실제 입력 예시 몇 개로 응답이 기대한 대로 파싱되는지 확인합니다. 함수 호출을 쓴다면 여러 번의 도구 호출이 포함된 흐름을 끝까지 실행해 Malformed_Function_Call과 MISSING_THOUGHT_SIGNATURE가 모두 나타나지 않는지 확인합니다.</p>
+<h2>OpenLux 중계로 호출할 때 주의할 점</h2>
+<p>OpenLux 요금 엔드포인트에는 현재 gemini-3.6-flash가 판매 중으로 표시되며, gemini-3.5-flash, gemini-3-flash-preview, gemini-3.8-flash 등도 판매 중으로 표시됩니다.</p>
+<p>지원 중단 모델 페이지에 있는 gemini-3.5-flash에서 gemini-3.6-flash로의 자동 라우팅은 Google 자체 API의 동작입니다. 중계를 통해 gemini-3.5-flash를 지정했을 때 어느 버전이 응답하는지는 이 페이지에서 확인하지 않았습니다. 이전할 때는 모델 이름을 직접 gemini-3.6-flash로 바꾸고 위 체크리스트를 적용해 동작을 명확하게 하세요.</p>
+<p>Gemini 네이티브 형식의 요청 경로는 /v1beta/models/gemini-3.6-flash:generateContent이며, OpenAI 호환 엔드포인트도 있습니다. Google 예제가 사용하는 Interactions API(/v1beta/interactions)는 중계에서 확인된 엔드포인트에 포함되지 않으므로 동작한다고 가정하지 마세요. OpenAI 호환 형식에서 사고 파라미터가 필드별로 모델에 어떻게 전달되는지도 확인하지 않았습니다. 앞 섹션의 방법대로 최소 요청과 사고 토큰 수로 직접 확인하세요.</p>
+<p>키는 OpenLux 콘솔의 토큰 페이지에서 만듭니다. 요금은 OpenLux 요금 페이지에서 확인하세요.</p>
+<p>아직 해결되지 않았나요? 전체 문서와 지원은 <a href="https://api.openlux.ai/register?channel=c_lkv0gzwj" rel="nofollow noopener" data-cta="docs">OpenLux Gemini 3.6 Flash API</a>에서 확인할 수 있습니다.</p>
+</div>
+<div>
+<h2>이 사이트의 더 많은 내용</h2>
+<ul class="frame-slot27">
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/pricing/">Gemini 3.6 Flash API의 비용은 얼마인가요?</a><span>기본 요금, 청구 기준 및 그룹 배수</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/quickstart/">Gemini 3.6 Flash API를 어떻게 호출하나요?</a><span>설정 단계 및 복사하여 바로 사용할 수 있는 코드</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/compare/">Gemini 3.6 Flash: 직접 API를 사용할까요, 게이트웨이를 사용할까요?</a><span>제한 사항을 포함한 항목별 비교</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/faq/">Gemini 3.6 Flash API — 자주 묻는 질문</a><span>통합할 때 사람들이 실제로 묻는 질문</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/gemini-flash-payment-options/">Gemini 3.6 Flash API 결제 옵션: 신용카드 없이 결제할 수 있나요?</a><span>결제 옵션 및 청구 확인</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/gemini-flash-buying/">Gemini 3.6 Flash API를 구매할 수 있는 곳</a><span>Buy Gemini 3.6 Flash</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/api-relay-explained/">API 릴레이는 Gemini 3.6 Flash에서 어떻게 작동하는가?</a><span>API 릴레이 101</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/claude-code-relay-config/">Claude Code용 Gemini 3.6 Flash 설정</a><span>Claude Code 릴레이 액세스 구성</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/gemini-flash-cost-comparison/">Gemini 3.6 Flash API 비용: 실용적인 가성비 점검</a><span>Gemini Flash API 비용 비교</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/gemini-api-ban-risk/">Gemini 3.6 Flash API를 사용하면 계정이 차단될 수 있나요?</a><span>API 사용 전에 차단 위험 검토</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/gemini-flash-free-trial/">2026년에 Gemini 3.6 Flash API를 무료로 써볼 수 있나요?</a><span>무료 할당량 상태</span></li>
+<li><a href="https://a37836323.github.io/gemini-3-6-flash-api-ko/organization-disabled-error-fix/">Cline에서 보이는 “api error 400 this organization has been disabled”: 먼저 확인할 것</a><span>비활성화된 조직 오류</span></li>
+</ul>
+</div>
+<div>
+<h2>시작하기</h2>
+<p>현재 가격 기록을 확인하고 통합 환경에서 Gemini 3.6 Flash를 검증하세요.</p>
+<p><a class="deck-panel87" href="https://api.openlux.ai/register?channel=c_lkv0gzwj" rel="nofollow noopener" data-cta="register-bottom">무료 크레딧으로 시작하기</a></p>
+<p>공식 사이트: <a href="https://api.openlux.ai/register?channel=c_lkv0gzwj" rel="nofollow noopener" data-cta="link">사이트 방문하기</a></p>
+</div>
+<p class="grid-frame44">최종 업데이트 2026년 10월 28일　|　OpenLux에서 작성하고 유지 관리합니다.<br>지연 시간과 가격 수치는 자체 측정 결과입니다. 공급업체 사이트와 다를 경우 공급업체의 실시간 페이지를 기준으로 합니다.</p>
+</main>
+<script>
+(function(){
+  try{
+    var EP='https://tk.openlux.ai/collect',S='gemini-3-6-flash-api-ko',L='ko-KR',V=1;
+    var sid=Math.random().toString(36).slice(2)+Date.now().toString(36);
+    function send(type,extra){
+      try{
+        var p={v:V,t:type,s:S,l:L,sid:sid,
+               r:document.referrer||'',
+               p:location.pathname||'/',
+               q:location.search||'',
+               sw:screen.width||0,
+               tz:(Intl.DateTimeFormat().resolvedOptions()||{}).timeZone||''};
+        for(var k in extra){p[k]=extra[k];}
+        var body=JSON.stringify(p);
+        if(navigator.sendBeacon){
+          navigator.sendBeacon(EP,new Blob([body],{type:'text/plain;charset=UTF-8'}));
+        }else{
+          fetch(EP,{method:'POST',body:body,keepalive:true,mode:'no-cors'});
+        }
+      }catch(e){}
+    }
+    if(document.visibilityState==='prerender'){
+      document.addEventListener('visibilitychange',function h(){
+        if(document.visibilityState!=='prerender'){
+          document.removeEventListener('visibilitychange',h);send('view');
+        }
+      });
+    }else{
+      send('view');
+    }
+    document.addEventListener('click',function(e){
+      var a=e.target&&e.target.closest?e.target.closest('a[data-cta]'):null;
+      if(!a)return;
+      send('click',{c:a.getAttribute('data-cta')||'',h:a.href||''});
+    },{capture:true,passive:true});
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
